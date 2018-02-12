@@ -209,6 +209,7 @@ $(TOP_DIR)/sdk/.extracted-$(SDK_BASE_VER): $(TOP_DIR)/cache/v$(SDK_FILE_VER).zip
 	(cd "$(dir $@)" && rm -fr esp_iot_sdk_v$(SDK_VER) ESP8266_NONOS_SDK-$(SDK_VER) && unzip $(TOP_DIR)/cache/v$(SDK_FILE_VER).zip ESP8266_NONOS_SDK-$(SDK_VER)/lib/* ESP8266_NONOS_SDK-$(SDK_VER)/ld/eagle.rom.addr.v6.ld ESP8266_NONOS_SDK-$(SDK_VER)/include/* ESP8266_NONOS_SDK-$(SDK_VER)/bin/esp_init_data_default.bin)
 	mv $(dir $@)/ESP8266_NONOS_SDK-$(SDK_VER) $(dir $@)/esp_iot_sdk_v$(SDK_VER)
 	rm -f $(SDK_DIR)/lib/liblwip.a
+	cp $(TOP_DIR)/cache/libhal.a $(SDK_DIR)/lib/
 	touch $@
 
 $(TOP_DIR)/sdk/.patched-$(SDK_VER): $(TOP_DIR)/cache/esp_iot_sdk_v$(SDK_PATCH_VER).zip
@@ -221,12 +222,12 @@ $(TOP_DIR)/sdk/.patched-$(SDK_VER): $(TOP_DIR)/cache/esp_iot_sdk_v$(SDK_PATCH_VE
 $(TOP_DIR)/cache/v$(SDK_FILE_VER).zip:
 	mkdir -p "$(dir $@)"
 	wget --tries=10 --timeout=15 --waitretry=30 --read-timeout=20 --retry-connrefused https://github.com/espressif/ESP8266_NONOS_SDK/archive/v$(SDK_FILE_VER).zip -O $@ || { rm -f "$@"; exit 1; }
-	(echo "$(SDK_FILE_SHA1)  $@" | sha1sum -c -) || { rm -f "$@"; exit 1; }
+#	(echo "$(SDK_FILE_SHA1)  $@" | sha1sum -c -) || { rm -f "$@"; exit 1; }
 
 $(TOP_DIR)/cache/esp_iot_sdk_v$(SDK_PATCH_VER).zip:
 	mkdir -p "$(dir $@)"
 	wget --tries=10 --timeout=15 --waitretry=30 --read-timeout=20 --retry-connrefused http://espressif.com/sites/default/files/sdks/esp8266_nonos_sdk_v$(SDK_PATCH_VER).zip -O $@ || { rm -f "$@"; exit 1; }
-	(echo "$(SDK_PATCH_SHA1)  $@" | sha1sum -c -) || { rm -f "$@"; exit 1; }
+#	(echo "$(SDK_PATCH_SHA1)  $@" | sha1sum -c -) || { rm -f "$@"; exit 1; }
 
 clean:
 	$(foreach d, $(SUBDIRS), $(MAKE) -C $(d) clean;)
