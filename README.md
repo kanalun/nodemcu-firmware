@@ -1,3 +1,10 @@
+# 修改说明
+
+* fork form https://github.com/nodemcu/nodemcu-firmware
+* 添加libhal.a
+* 添加xtensa头文件 (sdk-overrides/include/)
+* 修改Makefile去掉sha1验证(macox没有sha1sum)
+
 # **NodeMCU 2.1.0** #
 
 [![Join the chat at https://gitter.im/nodemcu/nodemcu-firmware](https://img.shields.io/gitter/room/badges/shields.svg)](https://gitter.im/nodemcu/nodemcu-firmware?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
