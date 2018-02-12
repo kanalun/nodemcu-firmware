@@ -16,7 +16,7 @@ http://arduino.esp8266.com/versions/2.4.0/package_esp8266com_index.json
 里面的工具,我使用的esp8266-2.4.0.zip就是从这里下载的!!
 
 或者直接下载 http://arduino.esp8266.com/osx-xtensa-lx106-elf-gb404fb9-2.tar.gz;
-解压添加,然后添加PATH!
+解压,然后添加PATH!
 
 PS:如果你用linux你可以看一下tools目录下的esp-open-sdk.tar.xz 
 
