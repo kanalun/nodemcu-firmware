@@ -1,9 +1,34 @@
-# 修改说明
 
+
+官方提供的NodeMCU缺少xtensa头文件和libhal
+
+### 修改说明
 * fork form https://github.com/nodemcu/nodemcu-firmware
-* 添加libhal.a
-* 添加xtensa头文件 (sdk-overrides/include/)
+* 添加libhal.a(来自arduino for esp8266 里面的 esp8266-2.4.0.zip)
+* 添加xtensa头文件 (sdk-overrides/include/xtensa)
 * 修改Makefile去掉sha1验证(macox没有sha1sum)
+
+### 编译NodeMCU
+
+1. 安装 xtensa-lx106-elf
+ESP8266使用 Tensilica Xtensa Processor 作为MCU;可以自己用crosstool-NG在mac上生成一套交叉编译工具;
+因为需要安装binutils coreutils ... 等N多的依赖(你可以 brew info crosstool-NG 看一下),我选择了arduino for esp8266 提供的编译好的xtensa-lx106-elf,你可以看一下 
+http://arduino.esp8266.com/versions/2.4.0/package_esp8266com_index.json 
+里面的工具,我使用的esp8266-2.4.0.zip就是从这里下载的!!
+或者直接下载 http://arduino.esp8266.com/osx-xtensa-lx106-elf-gb404fb9-2.tar.gz;
+解压添加,然后添加PATH!
+
+> export PATH="$PATH:/opt/xtensa-lx106-elf/bin"
+
+
+2. 安装esptool
+
+
+> $ pip install esptool
+
+
+3. cd到目录 make 就行了!
+
 
 # **NodeMCU 2.1.0** #
 
